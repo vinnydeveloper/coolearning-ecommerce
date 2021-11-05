@@ -4,10 +4,13 @@ module.exports = {
     let total = 0;
     if (!cart) return res.render("cart/list", { cart: [], total });
 
-    total = cart.reduce(
-      (productPrev, productNext) =>
-        Number(productPrev.price) + Number(productNext.price)
-    );
+    // cart.forEach((product) => {
+    //   total += Number(product.price);
+    // });
+
+    total = cart
+      .map((product) => Number(product.price))
+      .reduce((sum, price) => sum + price);
 
     return res.render("cart/list", { cart, total });
   },
